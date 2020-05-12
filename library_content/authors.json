@@ -1,0 +1,22 @@
+[
+    {
+        "id":0,
+        "name": "Vladimir Lenin",
+        "birthyear":1870
+    },
+    {
+        "id":1,
+        "name": "Karl Marx",
+        "birthyear":1818
+    },
+    {
+        "id":2,
+        "name": "Freidrich Engels",
+        "birthyear":1820
+    },
+    {
+        "id":3,
+        "name": "Peter Kropotkin",
+        "birthyear":1842
+    }
+]

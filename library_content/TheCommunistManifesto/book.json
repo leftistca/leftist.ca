@@ -1,0 +1,6 @@
+{
+    "id":1,
+    "title": "The Communist Manifesto",
+    "year": 1848,
+    "author_ids": [1, 2]
+}

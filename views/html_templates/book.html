@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+    <head>
+
+    </head>
+    <html>
+        <h1>Title: {{.Title}}</h1>
+        <p>{{.Year}}</p>
+        {{with .Authors}}
+            <p>Authors: 
+                {{range .}}
+                    {{.Name}}, 
+                {{end}}
+            </p>
+        {{end}}
+    </html>
+</html>
