@@ -2,56 +2,63 @@ package litlenlib
 
 import (
 	"fmt"
-	"path/filepath"
-	"os"
 	"log"
+	"math/rand"
+	"os"
+	"path/filepath"
 	"strings"
 )
 
 type Library struct {
-	books []Book
+	books   []Book
 	authors []Author
 }
 
 func NewLibrary(libraryPath string) (*Library, error) {
 	lib := Library{
-		books: []Book{},
+		books:   []Book{},
 		authors: []Author{},
 	}
 
 	authors, err := NewAuthorSlice(libraryPath + "authors.json")
-	if(err != nil){
+	if err != nil {
 		log.Fatal(err)
 	}
 	lib.authors = authors
 
 	//find all book.json files and parse them as books.
 	err = filepath.Walk(libraryPath, func(path string, info os.FileInfo, err error) error {
-		if( err != nil){
+		if err != nil {
 			return err
 		}
 
-		if(strings.ToLower(filepath.Base(path)) == "book.json"){ //if the file ends in 'book.json'
+		if strings.ToLower(filepath.Base(path)) == "book.json" { //if the file ends in 'book.json'
 			book, err := NewBook(path, lib)
-			if(err != nil){
+			if err != nil {
 				return err
 			}
-			
+
 			lib.books = append(lib.books, book)
 		}
 		return nil
 	})
-	if(err != nil){
+	if err != nil {
 		log.Fatal(err)
 	}
 
 	return &lib, nil
 }
 
+func (lib Library) GetRandomBook() (Book, error) {
+	if len(lib.books) == 0 {
+		return Book{}, fmt.Errorf("Could not choose a random book - there are no books in the library")
+	}
+	return lib.books[rand.Intn(len(lib.books))], nil
+}
 
 func (lib Library) GetBook(id int) (Book, error) {
 	for _, book := range lib.books {
-		if(book.Id == id){
+		if book.Id == id {
 			return book, nil
 		}
 	}
@@ -60,7 +67,7 @@ func (lib Library) GetBook(id int) (Book, error) {
 
 func (lib Library) GetAuthor(id int) (Author, error) {
 	for _, author := range lib.authors {
-		if(author.Id == id){
+		if author.Id == id {
 			return author, nil
 		}
 	}
