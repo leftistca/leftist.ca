@@ -1,19 +1,43 @@
 <!DOCTYPE html>
 <html>
     <head>
-
+        <link rel="stylesheet" type="text/css" href="hella.css">
+        <link rel="stylesheet" type="text/css" href="style.css">
+        <link href="https://fonts.googleapis.com/css2?family=Heebo&display=swap" rel="stylesheet"> 
     </head>
     <html>
-        {{range .}}
-            <p>Title: {{.Title}}</p>
-            <p>{{.Year}}</p>
-            {{with .Authors}}
-                <p>Authors: 
-                    {{range .}}
-                        {{.Name}}, 
-                    {{end}}
-                </p>
+        <header>
+            <a href="#" id="left_banner">
+                <img id="context_button" src="back_arrow.svg">
+                <div id="logo_container">
+                    <img id="logo" src="leftist_ca_logo.svg">
+                </div>
+            </a>
+        
+            <nav>
+                <a href="#">LIBRARY</a>
+                <a href="#">AUTHORS</a>
+                <a href="#">CONTRIBUTE</a>
+            </nav>
+        </header>
+        <main>
+            {{range .}}
+                <p>Title: {{.Title}}</p>
+                <p>{{.Year}}</p>
+                {{with .Authors}}
+                    <p>Authors: 
+                        {{range .}}
+                            {{.Name}}, 
+                        {{end}}
+                    </p>
+                {{end}}
             {{end}}
-        {{end}}
+            <div class="grid">
+                <div class="row">
+                    <div class="column three">Hello World</div>
+                    <div class="column three">Hello World</div>
+                </div>
+            </div>
+        </main>
     </html>
 </html>

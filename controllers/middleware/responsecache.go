@@ -3,9 +3,10 @@ package middleware
 import (
 	"net/http"
 	"sync"
+
 	//"io/ioutil"
-	"fmt"
 	"bytes"
+	"fmt"
 )
 
 /* CUSTOM RESPONSEREADWRITER */
@@ -39,11 +40,11 @@ func (r *ResponseReadWriter) WriteHeader(statusCode int) {
 
 type ResponseCache struct {
 	responses map[string]ResponseReadWriter
-	mux sync.Mutex
+	mux       sync.Mutex
 }
 
 func NewResponseCache() *ResponseCache {
-	rc := ResponseCache {
+	rc := ResponseCache{
 		responses: map[string]ResponseReadWriter{},
 	}
 	return &rc
@@ -80,10 +81,10 @@ func (rc *ResponseCache) HandleRequest(h http.HandlerFunc) http.HandlerFunc {
 				w.Header().Set(key, value)
 			}
 		}
-		
-		w.WriteHeader(response.statusCode) 	//Set the status code
-											//This call must come AFTER w.Header.Set(...) or else it seems like those values get overwritten.
-		
+
+		w.WriteHeader(response.statusCode) //Set the status code
+		//This call must come AFTER w.Header.Set(...) or else it seems like those values get overwritten.
+
 		response.body.WriteTo(w) // Copy body to new ResponseWriter
 	}
 }

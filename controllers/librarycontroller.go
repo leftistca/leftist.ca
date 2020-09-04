@@ -1,13 +1,11 @@
 package libraryController
 
 import (
-	"fmt"
 	"log"
 	"net/http"
 	"strconv"
 
 	"../controllers/middleware"
-
 	"../models/litlenlib"
 	"../views/libraryview"
 
@@ -34,7 +32,6 @@ func Index(view libraryview.LibraryView, lib *litlenlib.Library) http.HandlerFun
 			}
 			randomBooks = append(randomBooks, &randomBook)
 		}
-		fmt.Printf("%+v\n", randomBooks[0])
 		err := view.RenderIndex(w, randomBooks)
 		if err != nil {
 			log.Fatal(err)
